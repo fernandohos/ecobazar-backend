@@ -11,5 +11,7 @@ CREATE TABLE orders (
     delivery_status VARCHAR(50),
     discount NUMERIC(10, 2),
     shipping_price NUMERIC(10, 2),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP DEFAULT NOW() NOT NULL
 );

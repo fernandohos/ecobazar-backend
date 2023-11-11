@@ -11,5 +11,7 @@ CREATE TABLE products (
     weight NUMERIC(10, 2),
     color VARCHAR(50) NOT NULL,
     type VARCHAR(50) NOT NULL,
-    unit_type VARCHAR(10)
+    unit_type VARCHAR(10),
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP DEFAULT NOW() NOT NULL
 );
