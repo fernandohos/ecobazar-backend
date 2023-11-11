@@ -12,10 +12,10 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 const saltRounds = 10; // bcrypt salt rounds
 
 async function register(req: Request, res: Response) {
-  const { name, email, password } = req.body;
+  const { first_name, last_name, email, password } = req.body;
 
   // validate fields
-  if (!validateEmptyFields({ name, email, password })) {
+  if (!validateEmptyFields({ first_name, last_name, email, password })) {
     res.status(400).json({ message: "All inputs is required!" });
     return;
   }
@@ -32,7 +32,7 @@ async function register(req: Request, res: Response) {
     return;
   }
 
-  if (name.length < 2) {
+  if (first_name.length < 2 || last_name.length < 2) {
     res.status(400).json({ message: "Name must have at least 2 characters!" });
     return;
   }
@@ -54,7 +54,8 @@ async function register(req: Request, res: Response) {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const user = {
-    name: capitalizeFirstLetters(name),
+    first_name: capitalizeFirstLetters(first_name),
+    last_name:  capitalizeFirstLetters(last_name),
     email: email.toLowerCase(),
     password: hashedPassword,
   };
