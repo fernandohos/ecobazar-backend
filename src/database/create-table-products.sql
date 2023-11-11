@@ -4,6 +4,7 @@ CREATE TABLE products (
     description TEXT NOT NULL,
     sku VARCHAR(50),
     price NUMERIC(10, 2) NOT NULL,
+    old_price NUMERIC(10, 2),
     category VARCHAR(50) NOT NULL,
     tags TEXT[] NOT NULL,
     stock INTEGER,
