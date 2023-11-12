@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { router as authRouter } from "./routes/auth-router";
 import { router as productsRouter } from "./routes/products-router";
+import { router as categoriesRouter } from "./routes/categories-router";
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(authRouter);
 app.use(productsRouter);
+app.use(categoriesRouter);
 
 app.get("/", (req, res) => {
   res.send("hello world!");
