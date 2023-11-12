@@ -67,4 +67,20 @@ async function getProducts(filters: FiltersType) {
   }
 }
 
-export default { getProducts };
+async function searchProducts(name: string) {
+  const client = await db.connect();
+
+  try {
+    const query = `SELECT * FROM products WHERE name ILIKE $1`;
+    const value = [`%${name}%`];
+
+    const result = await client.query(query, value);
+
+    return result.rows;
+  } catch (error) {
+    console.error("Error while searching products: ", error);
+    throw error;
+  }
+}
+
+export default { getProducts, searchProducts };

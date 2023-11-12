@@ -11,7 +11,22 @@ async function getFilteredProducts(req: Request, res: Response) {
     tags,
     page = 1,
     page_size = 16,
+    search,
   } = req.query;
+
+  if (search) {
+    try {
+      const queryResponse = await productsModel.searchProducts(String(search));
+
+      return res.status(200).json(queryResponse);
+    } catch (error) {
+      console.error("Error while searching products: ", error);
+      return res
+        .status(500)
+        .json({ message: "Internal Server Error while searching products" });
+    }
+  }
+
   const page_offset = (Number(page) - 1) * Number(page_size);
 
   const filters = {
@@ -26,12 +41,12 @@ async function getFilteredProducts(req: Request, res: Response) {
   try {
     const responseProducts = await productsModel.getProducts(filters);
 
-    res
-      .status(200)
-      .json({ message: "products fetched succesffully", ...responseProducts });
+    return res.status(200).json(responseProducts);
   } catch (error) {
-    console.error("Erro ao buscar produtos:", error);
-    res.status(500).json({ error: "Erro ao buscar produtos." });
+    console.error("Error while filtering products: ", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error while filtering products" });
   }
 }
 
