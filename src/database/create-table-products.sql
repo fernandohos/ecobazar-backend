@@ -10,7 +10,6 @@ CREATE TABLE products (
     stock INTEGER,
     weight NUMERIC(10, 2),
     color VARCHAR(50) NOT NULL,
-    type VARCHAR(50) NOT NULL,
     unit_type VARCHAR(10),
     images TEXT[],
     created_at TIMESTAMP DEFAULT NOW() NOT NULL,
