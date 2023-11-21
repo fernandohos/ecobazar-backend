@@ -10,7 +10,7 @@ export type Product = {
   stock: number;
   weight: number;
   color: string;
-  type: string;
+  images: string[];
   unit_type: string;
   created_at: number;
   updated_at: number;
