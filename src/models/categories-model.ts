@@ -12,9 +12,9 @@ async function getCategories() {
     FROM
       categories c
     LEFT JOIN
-      products p ON c.name = p.category
+      products p ON LOWER(c.name) = LOWER(p.category)
     GROUP BY
-      c.id, c.name
+      c.id, c.name, c.icon_url
     ORDER BY
       c.name;
     `;
